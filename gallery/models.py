@@ -30,3 +30,8 @@ class Image(models.Model):
     self.save()
   def delete_image(self):
     Image.objects.filter(pk=self.id).delete()
+
+  @classmethod
+  def all_images(cls):
+    images = cls.objects.all()
+    return images
