@@ -9,6 +9,8 @@ class Location(models.Model):
     self.save()
   def delete_location(self):
     Location.objects.filter(pk=self.id).delete()
+  def __str__(self):
+    return self.i_location
 
 class Category(models.Model):
   i_category = models.CharField(max_length=30, blank=True)
@@ -17,6 +19,8 @@ class Category(models.Model):
     self.save()
   def delete_category(self):
     Category.objects.filter(pk=self.id).delete()
+  def __str__(self):
+    return self.i_category
 
 class Image(models.Model):
   picture = models.ImageField(upload_to='')
@@ -34,4 +38,9 @@ class Image(models.Model):
   @classmethod
   def all_images(cls):
     images = cls.objects.all()
+    return images
+
+  @classmethod
+  def search_by_category(cls,search_term):
+    images = cls.objects.filter(i_name__icontains=search_term)
     return images
